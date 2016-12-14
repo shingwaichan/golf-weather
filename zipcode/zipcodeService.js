@@ -54,7 +54,7 @@ function getGolfCoursesForZipcode(zip, callback) {
 
 function getLatLongForZipcode(zip, callback) {
     var u = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + zip +"&" + "key=" + googleApiKey;
-    console.log("URL --- " + u);
+//    console.log("URL --- " + u);
     getJSONData(u, function(data) {
         var p = data.results[0].geometry.location;
 //        console.log("location:", p);
@@ -68,7 +68,7 @@ function getJSONData(url, callback) {
 
     https.get(url, (res) => {
       console.log('statusCode:', res.statusCode);
-      console.log('headers:', res.headers);
+//      console.log('headers:', res.headers);
 
       res.on('data', (d) => {
         buffer += d;
@@ -91,7 +91,7 @@ function getJSONData(url, callback) {
 }
 
 function handleRequest(request, response){
-    console.log(request.url);
+//    console.log(request.url);
     var queryObj = url.parse(request.url,true).query;
     var zipCode = queryObj.zipcode;
     if (typeof zipCode !== 'undefined' && zipCode) {
