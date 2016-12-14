@@ -1,0 +1,14 @@
+{
+    "name": "weatherservice",
+    "version": "1.0.0",
+    "description": "Weather Service using Node.js on Docker",
+    "author": "Shing Wai Chan <shingwai.chan@gmail.com>",
+    "main": "accweather.js",
+    "scripts": {
+        "start": "node accweather.js"
+    },
+    "dependencies": {
+        "http": "*",
+        "url": "*"
+    }
+}
