@@ -99,11 +99,46 @@ function handleRequest(request, response){
     var queryObj = url.parse(request.url,true).query;
     var zipCode = queryObj.zipcode;
     if (typeof zipCode !== 'undefined' && zipCode) {
-        getGolfCoursesForZipcode(zipCode, function(ll) {
-//            console.log("Got Lat, Long:", ll);
-            response.write(JSON.stringify(ll));
+        if (zipCode == '95501') {
+            var mock = { "mockdata" :
+                            [
+                                 {
+                                   "name": "Redwood Empire Golf & Country Club",
+                                   "lat": 40.56554089999999,
+                                   "lng": -124.1076458
+                                 },
+                                 {
+                                   "name": "Beau Pre Golf Club",
+                                   "lat": 40.963088,
+                                   "lng": -124.0970159
+                                 },
+                                 {
+                                   "name": "Eureka Municipal Golf Course",
+                                   "lat": 40.7586676,
+                                   "lng": -124.1700981
+                                 },
+                                 {
+                                   "name": "Bigfoot Golf & Country Club",
+                                   "lat": 40.950645,
+                                   "lng": -123.626781
+                                 },
+                                 {
+                                   "name": "Bigfoot Golf Country Club",
+                                   "lat": 40.9533704,
+                                   "lng": -123.627184
+                                 }
+                            ]
+                       };
+            // console.log(JSON.stringify(mock.mockdata));
+            response.write(JSON.stringify(mock.mockdata));
             response.end();
-        });
+        } else {
+            getGolfCoursesForZipcode(zipCode, function(ll) {
+    //            console.log("Got Lat, Long:", ll);
+                response.write(JSON.stringify(ll));
+                response.end();
+            });
+        }
 
     } else {
         response.write('{}');
