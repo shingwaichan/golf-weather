@@ -3,7 +3,7 @@ var http = require('http');
 var url = require('url');
 
 const host = 'dataservice.accuweather.com';
-const PORT = 8080;
+const PORT = 8888;
 const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
 
 var hp = process.env.http_proxy;
@@ -44,7 +44,7 @@ function invokeEndpoint(endpoint, params, callback) {
 
     console.log(querydata);
 
-    endpoint += '?' + querystring.stringify(querydata);
+    endpoint += '?' + querystring.stringify(querydata) + '&details=true';
     var options = {
         host: myhost,
         port: myport,
