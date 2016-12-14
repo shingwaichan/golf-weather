@@ -1,17 +1,42 @@
 var querystring = require('querystring');
 var http = require('http');
 var url = require('url');
+var fs = require('fs');
 
 const host = 'dataservice.accuweather.com';
 const PORT = 8888;
 //const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
 const apikey = 'IZoxiS1DpTKKjY3A8RkbS4CrL74MBDfE';
 
+// load hash
+var contents = fs.readFileSync('mockdata.txt', 'utf-8').toString();
+var lines = contents.split(/\r?\n/);
+
+var mockHash = {};
+var odd = true;
+var key;
+
+lines.forEach(function(line) {
+    if (odd) {
+        key = line;
+    } else {
+        mockHash[key] = line;
+    }
+    odd = !odd;
+});
+
 var hp = process.env.http_proxy;
 console.log('http_proxy = ' + hp);
 
 function getWeather(latlng, callback) {
     var latClng = latlng.lat + ',' + latlng.lng;
+    var mockValue = mockHash[latClng];
+    if (typeof mockValue !== 'undefined' && mockValue) {
+        callback(mockValue);
+        console.log("use mock data");
+        return;
+    }
+
     invokeEndpoint('/locations/v1/cities/geoposition/search', { 'q' : latClng },
         function(data) {
             var responseObj = JSON.parse(data);
