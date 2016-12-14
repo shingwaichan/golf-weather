@@ -1,0 +1,15 @@
+{
+  "name": "zipcodeservice",
+  "version": "1.0.0",
+  "description": "zipcodeservice using Node",
+  "author": "Dhiru Pandey <dhiru.pandey@gmail.com>",
+  "main": "zipcodeService.js",
+  "scripts": {
+    "start": "node zipcodeService.js"
+  },
+  "dependencies": {
+    "http": "*",
+    "https": "*",
+    "url": "*"
+  }
+}
