@@ -7,11 +7,11 @@ node zipcodeService.js
 
 ~/work/node/golf-weather/zipcode> node zipcodeService.js
 
-Server listening on: http://localhost:9090
+Server listening on: http://localhost:8889
 
 * Accessing the service
 
-http://localhost:8080/?zipcode=94539
+http://localhost:8889/?zipcode=94539
 
 * Sample output:
 
