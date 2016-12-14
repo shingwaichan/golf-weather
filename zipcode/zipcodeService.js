@@ -42,10 +42,13 @@ function getGolfCoursesForZipcode(zip, callback) {
             var ans = [];
             for (var i = 0; i < results.length; i++) {
                 var jsonData = {};
-                jsonData["name"] = results[i].name;
-                jsonData["lat"] = results[i].geometry.location.lat;
-                jsonData["lng"] = results[i].geometry.location.lng;
-                ans.push(jsonData);
+                var s = JSON.stringify(results[i].name);
+                if ((s.includes("Golf")) || (s.includes("golf"))) {
+                    jsonData["name"] = results[i].name;
+                    jsonData["lat"] = results[i].geometry.location.lat;
+                    jsonData["lng"] = results[i].geometry.location.lng;
+                    ans.push(jsonData);
+                }
             }
             callback(ans);
         });
