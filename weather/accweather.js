@@ -3,25 +3,23 @@ var http = require('http');
 var url = require('url');
 
 const host = 'dataservice.accuweather.com';
-var PORT = 8080;
-var apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
+const PORT = 8080;
+const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
 
-function getWeather(latlng, response) {
+var hp = process.env.http_proxy;
+console.log('http_proxy = ' + hp);
+
+function getWeather(latlng, callback) {
     var latClng = latlng.lat + ',' + latlng.lng;
-    invokeEndpoint('/locations/v1/cities/geoposition/search', { 'q' : latClng }, response,
+    invokeEndpoint('/locations/v1/cities/geoposition/search', { 'q' : latClng },
         function(data) {
             var responseObj = JSON.parse(data);
             var locKey = responseObj.Key;
-            invokeEndpoint('/forecasts/v1/hourly/12hour/' + locKey, {}, response,
-                function(data) {
-                    response.write(data);
-                    response.end();
-                });
+            invokeEndpoint('/forecasts/v1/hourly/12hour/' + locKey, {}, callback);
         });
 }
 
-function invokeEndpoint(endpoint, params, response, callback) {
-    var hp = process.env.http_proxy;
+function invokeEndpoint(endpoint, params, callback) {
     var myhost = host;
     var myport = 80;
     if (typeof hp !== 'undefined' && hp) {
@@ -31,8 +29,8 @@ function invokeEndpoint(endpoint, params, response, callback) {
 
         var ind = myhost.indexOf(":");
         if (ind !== -1) {
-            myhost = myhost.substring(0, ind);
             myport = myhost.substring(ind + 1);
+            myhost = myhost.substring(0, ind);
         }
         endpoint = 'http://' + host + endpoint;
     }
@@ -65,7 +63,7 @@ function invokeEndpoint(endpoint, params, response, callback) {
         });
 
         res.on('end', function() {
-            console.log(responseString);
+            //console.log(responseString);
             callback(responseString);
         });
     });
@@ -85,8 +83,12 @@ function handleRequest(request, response){
     var lng = queryObj.lng;
     if (typeof lat !== 'undefined' && lat &&
             typeof lng != 'undefined' && lng) {
-        // e.g. lat = 37.37730499999999, lng = -121.8894033 
-        getWeather({ 'lat': lat, 'lng': lng }, response);
+        // e.g. lat=37.37730499999999, lng=-121.8894033 
+        getWeather({ 'lat': lat, 'lng': lng },
+            function(data) {
+                response.write(data);
+                response.end();
+            });
     } else {
         response.write('{}');
         response.end();
