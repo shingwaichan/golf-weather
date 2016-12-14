@@ -1,0 +1,10 @@
+div.jumbotron {
+  background-color: white;
+  filter: opacity(70%);
+  position:relative;
+  top:-550px
+}
+
+img {
+  width: 100%;
+}
