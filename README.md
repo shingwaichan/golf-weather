@@ -3,11 +3,11 @@
 ## zipcode
 * Running the service
 
-...node zipcodeService.js
+node zipcodeService.js
 
-...~/work/node/golf-weather/zipcode> node zipcodeService.js
+~/work/node/golf-weather/zipcode> node zipcodeService.js
 
-...Server listening on: http://localhost:8080
+Server listening on: http://localhost:9090
 
 * Accessing the service
 
