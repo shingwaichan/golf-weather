@@ -4,7 +4,8 @@ var url = require('url');
 
 const host = 'dataservice.accuweather.com';
 const PORT = 8888;
-const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
+//const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
+const apikey = 'IZoxiS1DpTKKjY3A8RkbS4CrL74MBDfE';
 
 var hp = process.env.http_proxy;
 console.log('http_proxy = ' + hp);
