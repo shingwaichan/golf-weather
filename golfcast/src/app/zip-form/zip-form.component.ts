@@ -73,11 +73,8 @@ export class ZipFormComponent implements OnInit {
         let table = caption.find('tbody');
         console.log(weather);
         console.log(table);
-        for (let ii = 0, ilen = weather.length; ii < ilen; ii++) {
+        for (let ii = 0, ilen = Math.min(weather.length, 6); ii < ilen; ii++) {
           let w = weather[ii];
-          if (!w['IsDaylight']) {
-            continue;
-          }
           let d = new Date(0);
           d.setUTCSeconds(w['EpochDateTime']);
 
