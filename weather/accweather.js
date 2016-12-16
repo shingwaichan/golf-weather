@@ -5,8 +5,7 @@ var fs = require('fs');
 
 const host = 'dataservice.accuweather.com';
 const PORT = 8888;
-//const apikey = 'ps2dpQTA7xdXdrL7go7jJbm2S3CpuqCu';
-const apikey = 'IZoxiS1DpTKKjY3A8RkbS4CrL74MBDfE';
+const apikey = '';   // put your accuweather api key here
 
 // load hash
 var contents = fs.readFileSync('mockdata.txt', 'utf-8').toString();

@@ -4,7 +4,7 @@ var http = require("http");
 var https = require("https");
 var url = require("url");
 
-var googleApiKey = "AIzaSyBuDkTdAkPtsjEhuewt6d97m8KlKnFvgjk";
+var googleApiKey = "";   // put your google api key here
 
 // var zipCode = "94539";
 
