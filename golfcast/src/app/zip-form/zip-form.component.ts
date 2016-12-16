@@ -20,8 +20,8 @@ export class ZipFormComponent implements OnInit {
 
   onSubmit(form: any): void {
     console.log('Submitted zipcode:', form.zip);
-    let url = 'http://localhost:8889?zipcode=' + form.zip;
-    console.log('Sending request:' + url);
+    let url = 'http://104.198.106.224:8889?zipcode=' + form.zip;
+    console.log('Getting courses near zipcode:' + url);
     this.http.get(url)
       .map(this.extractCoursesAndWeather.bind(this))
       .catch(ZipFormComponent.handleError).subscribe();
@@ -50,7 +50,7 @@ export class ZipFormComponent implements OnInit {
       let name = courses[i]['name'];
       let lat = courses[i]['lat'];
       let lng = courses[i]['lng'];
-      let url = 'http://localhost:8888?lat=' + lat + '&lng=' + lng;
+      let url = 'http://104.198.11.90:8888?lat=' + lat + '&lng=' + lng;
       console.log('Getting weather for lng/lat: ' + url);
 
       indicators.append('<li data-target="#courses-carousel" data-slide-to="' + i + '" ' + ((i === 0) ? 'class="active"' : '') + '></li>');
@@ -71,8 +71,6 @@ export class ZipFormComponent implements OnInit {
 
         let weather = response.json();
         let table = caption.find('tbody');
-        console.log(weather);
-        console.log(table);
         for (let ii = 0, ilen = Math.min(weather.length, 6); ii < ilen; ii++) {
           let w = weather[ii];
           let d = new Date(0);
